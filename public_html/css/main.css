@@ -1,0 +1,63 @@
+html, body { /*main style*/
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: white;
+	font-size: 15pt;
+	background: dimgray;
+	margin: 0;
+	height: 100%;
+}
+header { /*style for the header*/
+	font-family: '8BITWONDERNominal', sans-serif;
+	text-shadow: 2px 2px #3CC;
+	text-align: center;
+	padding: 10%;
+	background: #222;
+	height: 100px;
+	margin: 0 auto;
+}
+.header-main-text { /*Main header text*/
+	width: 70%;
+}
+.header-main-text:hover {
+	color: #3CC;
+	text-shadow: 2px 2px white;
+}
+.header-sub-text { /*header subtext*/
+	width: 80%;
+	text-align: right;
+}
+.header-sub-text:hover {
+	color: #3CC;
+	text-shadow: 2px 2px white;
+}
+p:hover, p:focus, p:active {
+	-webkit-transform: skew(-10deg);
+	transform: skew(-10deg);
+}
+section { /*for sections*/
+	width: 35%;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+ul { /*unordered list*/
+	text-align: left;
+}
+ul:hover, ul:focus, ul:active {
+	-webkit-transform: rotate(5deg);
+	transform: rotate(5deg);
+}
+tr { /*table rows*/
+	text-align: left;
+}
+table:hover, table:focus, table:active {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+.image-holder{
+
+}
+.image-holder:hover, .image-holder:focus, .image-holder:active {
+	filter: invert(100%);
+}
+
