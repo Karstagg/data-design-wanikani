@@ -31,22 +31,19 @@ header { /*style for the header*/
 	text-shadow: 2px 2px white;
 }
 p:hover, p:focus, p:active {
-	-webkit-transform: skew(-10deg);
-	transform: skew(-10deg);
+	-webkit-transform: skew(-5deg);
+	transform: skew(-5deg);
 }
 section { /*for sections*/
 	width: 35%;
-	text-align: center;
+	text-align: left;
 	margin: 0 auto;
 	padding-top: 50px;
 }
 ul { /*unordered list*/
 	text-align: left;
 }
-ul:hover, ul:focus, ul:active {
-	-webkit-transform: rotate(5deg);
-	transform: rotate(5deg);
-}
+
 tr { /*table rows*/
 	text-align: left;
 }
