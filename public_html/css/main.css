@@ -1,5 +1,6 @@
 html, body { /*main style*/
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	text-shadow:0px 0px 5px black;
 	color: white;
 	font-size: 15pt;
 	background: dimgray;
@@ -30,9 +31,11 @@ header { /*style for the header*/
 	color: #3CC;
 	text-shadow: 2px 2px white;
 }
+
 p:hover, p:focus, p:active {
-	-webkit-transform: skew(-5deg);
-	transform: skew(-5deg);
+	font-size: 110%;
+	color: #3CC;
+	text-shadow:0px 0px 5px black;
 }
 section { /*for sections*/
 	width: 35%;
@@ -43,7 +46,14 @@ section { /*for sections*/
 ul { /*unordered list*/
 	text-align: left;
 }
-
+ul:hover {
+	font-size: 110%;
+	color: #3CC;
+}
+ol:hover {
+	font-size: 110%;
+	color: #3CC;
+}
 tr { /*table rows*/
 	text-align: left;
 }

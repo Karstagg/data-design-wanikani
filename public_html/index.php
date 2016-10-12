@@ -30,10 +30,15 @@
 			<section>
 				<h2>Persona</h2>
 				<details>
-					<h4>Steve</h4>
-					<p>Steve is a 24 year old English teacher in Japan. He has a B.A. in English. He doesn't know Japanese that well and he isn't super motivated to study. He uses wanikani to study kanji and vocabulary. Steve is very familiar with internet browsers and uses them frequently.</p>
-					<p>Steve's goal is to increase his ability to read kanji and increase his vocabulary size in Japanese</p>
-					<h4>Info</h4>
+					<h3>John Meerschwein</h3>
+					<p><strong>Age:</strong>24</p>
+					<p><strong>Profession:</strong>English teacher in Japan. Teaches at an afterschool "cram school" program.</p>
+					<p><strong>Technology:</strong>Reasonably proficient with Windows and web browsers (chrome and firefox).</p>
+					<p><strong>Education:</strong>Has a B.A. in English. Does not know much Japanese.</p>
+					<p><strong>Attitudes and Behaviors:</strong>Not incredibly motivated to study. After work John likes to play video games and finds it hard to set aside much time for anything else.</p>
+					<p><strong>Needs:</strong>John needs a simple method for studying Japanese that requires the minimal amount of effort on his part, but still provides results.</p>
+					<p><strong>Goal:</strong>To increase his ability to read kanji, specifically by looking at their radicals, and increase his vocabulary size in Japanese.</p>
+					<h3>Summary</h3>
 					<ul>
 						<li>Steve</li>
 						<li>Male</li>
@@ -42,15 +47,26 @@
 						<li>B.A. English</li>
 						<li>Doesn't know much Japanese</li>
 						<li>not great at studying</li>
-						<li>uses wanikani to study kanji and vocabulary</li>
-						<li>uses web browsers often</li>
+						<li>Proficient with windows and generic web browsers</li>
+						<li>needs something that makes studying simple</li>
+						<li>Wants to increase his reading ability in Japanese</li>
 					</ul>
 				</details>
 			</section>
 			<section>
-				<h2>Use Case</h2>
+				<h2>Use Case and Interaction Flow</h2>
 				<details>
-					<p></p>
+					<h3>Use Case</h3>
+					<p>John Meerschwein just got home from work. He's exhausted and slightly annoyed from working with children all evening, he just wants to relax. However, John is also annoyed that he got lost on his way home again due to his inability to read Kanji. John decides enough is enough, he needs to learn Kanji. Being about as motivated to do anything as John ever has been in his whole life, he searches for "Learn kanji easily". He finds wanikani, which starts creates and manages flash cards for you, starting with kanji radicals.</p>
+					<h3>Interaction Flow</h3>
+					<ol>
+						<li>John creates an account and logs in on his favorite web browser</li>
+						<li>John clicks on the "lessons" button and reads through the new items he needs to memorize</li>
+						<li>John takes the quiz for the items he just read through</li>
+						<li>John logs out for the night</li>
+						<li>The next day after work, John logs back in an reviews the items he learned yesterday</li>
+						<li>John logs out again for the night</li>
+					</ol>
 				</details>
 			</section>
 			<section>
