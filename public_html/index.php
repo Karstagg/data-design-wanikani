@@ -70,9 +70,33 @@
 				</details>
 			</section>
 			<section>
-				<h2>Entities</h2>
+				<h2>Entities and Attributes</h2>
 				<details>
-					<p></p>
+					<h3>For Radicals</h3>
+					<ul>
+						<li>Radical button</li>
+						<details>
+							<ul>
+								<li>Radical dropdown</li>
+								<ul>
+									<li>Levels</li>
+										<ul>
+											<li>1-10</li>
+											<li>11-20</li>
+											<li>21-30</li>
+											<li>31-40</li>
+											<li>41-50</li>
+											<li>51-60</li>
+										</ul>
+									<li>Latice</li>
+										<ul>
+											<li>Name</li>
+											<li>Progress</li>
+										</ul>
+								</ul>
+							</ul>
+						</details>
+					</ul>
 				</details>
 			</section>
 		</main>
