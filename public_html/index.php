@@ -11,7 +11,8 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/main.css" type="text/css" />
-		<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/8bit-wonder" type="text/css"/>
+		<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
 		<title>Data Design for Wanikani Radicals</title>
 	</head>
 	<body>
@@ -30,17 +31,18 @@
 			<section>
 				<h2>Persona</h2>
 				<details>
+					<summary></summary>
 					<h3>John Meerschwein</h3>
-					<p><strong>Age:</strong>24</p>
-					<p><strong>Profession:</strong>English teacher in Japan. Teaches at an afterschool "cram school" program.</p>
-					<p><strong>Technology:</strong>Reasonably proficient with Windows and web browsers (chrome and firefox).</p>
-					<p><strong>Education:</strong>Has a B.A. in English. Does not know much Japanese.</p>
-					<p><strong>Attitudes and Behaviors:</strong>Not incredibly motivated to study. After work John likes to play video games and finds it hard to set aside much time for anything else.</p>
-					<p><strong>Needs:</strong>John needs a simple method for studying Japanese that requires the minimal amount of effort on his part, but still provides results.</p>
-					<p><strong>Goal:</strong>To increase his ability to read kanji, specifically by looking at their radicals, and increase his vocabulary size in Japanese.</p>
+					<p><strong>Age: </strong>24</p>
+					<p><strong>Profession:  </strong>English teacher in Japan. Teaches at an afterschool "cram school" program.</p>
+					<p><strong>Technology: </strong>Reasonably proficient with Windows and web browsers (chrome and firefox). Doen't really use is phone for studying</p>
+					<p><strong>Education: </strong>Has a B.A. in English. Does not know much Japanese.</p>
+					<p><strong>Attitudes and Behaviors: </strong>Not incredibly motivated to study. After work John likes to play video games and finds it hard to set aside much time for anything else.</p>
+					<p><strong>Needs: </strong>John needs a simple method for studying Japanese that requires the minimal amount of effort on his part, but still provides results.</p>
+					<p><strong>Goal: </strong>To increase his ability to read kanji, specifically by looking at their radicals, and increase his vocabulary size in Japanese.</p>
 					<h3>Summary</h3>
 					<ul>
-						<li>Steve</li>
+						<li>John Meerschwein</li>
 						<li>Male</li>
 						<li>24 years old</li>
 						<li>English teacher in Japan</li>
@@ -56,11 +58,12 @@
 			<section>
 				<h2>Use Case and Interaction Flow</h2>
 				<details>
+					<summary></summary>
 					<h3>Use Case</h3>
-					<p>John Meerschwein just got home from work. He's exhausted and slightly annoyed from working with children all evening, he just wants to relax. However, John is also annoyed that he got lost on his way home again due to his inability to read Kanji. John decides enough is enough, he needs to learn Kanji. Being about as motivated to do anything as John ever has been in his whole life, he searches for "Learn kanji easily". He finds wanikani, which starts creates and manages flash cards for you, starting with kanji radicals.</p>
+					<p>John Meerschwein just got home from work. He's exhausted and slightly annoyed from working with children all evening, he just wants to relax. However, John is also annoyed that he got lost on his way home again due to his inability to read Kanji. John decides enough is enough, he needs to learn Kanji. Being about as motivated to do anything as John ever has been in his whole life, he searches for "Learn kanji easily" on his PC. He finds wanikani, which starts creates and manages flash cards for you, starting with kanji radicals.</p>
 					<h3>Interaction Flow</h3>
 					<ol>
-						<li>John creates an account and logs in on his favorite web browser</li>
+						<li>John creates an account and logs in on his favorite web browser on his PC</li>
 						<li>John clicks on the "lessons" button and reads through the new items he needs to memorize</li>
 						<li>John takes the quiz for the items he just read through</li>
 						<li>John logs out for the night</li>
@@ -72,28 +75,28 @@
 			<section>
 				<h2>Entities and Attributes</h2>
 				<details>
-					<h3>For Radicals</h3>
+					<summary></summary>
 					<ul>
-						<li>Radical button</li>
+						<li>Radicals</li>
 						<details>
+							<summary>Attributes</summary>
 							<ul>
-								<li>Radical dropdown</li>
-								<ul>
-									<li>Levels</li>
-										<ul>
-											<li>1-10</li>
-											<li>11-20</li>
-											<li>21-30</li>
-											<li>31-40</li>
-											<li>41-50</li>
-											<li>51-60</li>
-										</ul>
-									<li>Latice</li>
-										<ul>
-											<li>Name</li>
-											<li>Progress</li>
-										</ul>
-								</ul>
+								<li>radicalId</li>
+								<li>radicalLevel</li>
+								<li>lockedStatus</li>
+								<li>burnStatus</li>
+								<li>percentCorrect</li>
+							</ul>
+						</details>
+					</ul>
+					<ul>
+						<li>Profile</li>
+						<details>
+							<summary>Attributes</summary>
+							<ul>
+								<li>userId</li>
+								<li>userName</li>
+								<li>userLevel</li>
 							</ul>
 						</details>
 					</ul>
