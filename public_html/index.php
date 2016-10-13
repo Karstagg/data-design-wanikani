@@ -94,38 +94,23 @@
 				<h2>Entities and Attributes</h2>
 				<details>
 					<summary></summary>
-					<ul>
-						<li>Radicals</li>
-						<li>
-							<ul>
-								<li>radicalId (primary auto)</li>
-								<li>radical</li>
-								<li>radicalLevel</li>
-								<li>correctThreshold</li>
-							</ul>
-						</li>
+					<ul>Radicals
+						<li>radicalId (primary auto)</li>
+						<li>radical</li>
+						<li>radicalLevel</li>
+						<li>correctThreshold</li>
 					</ul>
-					<ul>
-						<li>Profile</li>
-						<li>
-							<ul>
-								<li>userId (primary auto)</li>
-								<li>userName</li>
-								<li>userEmail</li>
-								<li>userLevel</li>
-							</ul>
-						</li>
+					<ul>Profile
+						<li>userId (primary auto)</li>
+						<li>userName</li>
+						<li>userEmail</li>
+						<li>userLevel</li>
 					</ul>
-					<ul>
-						<li>Attempts</li>
-						<li>
-							<ul>
-								<li>userId (foreign)</li>
-								<li>radicalId (foreign)</li>
-								<li>isCorrect</li>
-								<li>timeTested</li>
-							</ul>
-						</li>
+					<ul>Attempts
+						<li>userId (foreign)</li>
+						<li>radicalId (foreign)</li>
+						<li>isCorrect</li>
+						<li>timeTested</li>
 					</ul>
 				</details>
 			</section>
