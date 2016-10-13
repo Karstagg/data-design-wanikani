@@ -99,11 +99,10 @@
 						<details>
 							<summary>Attributes</summary>
 							<ul>
-								<li>radicalId</li>
+								<li>radicalId (primary auto)</li>
+								<li>radical</li>
 								<li>radicalLevel</li>
-								<li>lockedStatus</li>
-								<li>burnStatus</li>
-								<li>percentCorrect</li>
+								<li>correctThreshold</li>
 							</ul>
 						</details>
 					</ul>
@@ -112,9 +111,22 @@
 						<details>
 							<summary>Attributes</summary>
 							<ul>
-								<li>userId</li>
+								<li>userId (primary auto)</li>
 								<li>userName</li>
+								<li>userEmail</li>
 								<li>userLevel</li>
+							</ul>
+						</details>
+					</ul>
+					<ul>
+						<li>Attempts</li>
+						<details>
+							<summary>Attributes</summary>
+							<ul>
+								<li>userId (foreign)</li>
+								<li>radicalId (foreign)</li>
+								<li>isCorrect</li>
+								<li>timeTested</li>
 							</ul>
 						</details>
 					</ul>

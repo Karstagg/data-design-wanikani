@@ -15,7 +15,7 @@ header { /*style for the header*/
 	background: #222;
 	height: 100px;
 	margin: 0 auto;
-	border-bottom: 2px;
+
 }
 .header-main-text { /*Main header text*/
 	width: 80%;
