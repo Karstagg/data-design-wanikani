@@ -114,7 +114,7 @@
 					</ul>
 					<br>
 					<div class="image-holder">
-						<img src="img/wanikaniDiagram.png" alt="Wanikani ERD">
+						<img src="img/wanikaniErd.svg" alt="Wanikani ERD">
 					</div>
 				</details>
 			</section>

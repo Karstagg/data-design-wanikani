@@ -12,7 +12,7 @@ header { /*style for the header*/
 	text-shadow: 1px 1px #3CC;
 	text-align: center;
 	padding: 5%;
-	background: #222;
+	background:repeating-linear-gradient(-35deg, #222, #222 1px, #219 1px, #219 1px);
 	height: 100px;
 	margin: 0 auto;
 
