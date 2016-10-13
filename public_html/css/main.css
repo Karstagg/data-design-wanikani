@@ -71,15 +71,12 @@ tr { /*table rows*/
 table { /*tables*/
 	transition-duration: 500ms;
 }
-table:hover, table:focus, table:active { /*hover for table*/
-	-webkit-transform: rotate(180deg);
-	transform: rotate(180deg);
-}
-.image-holder{ /*container for images*/
-
+.image-holder {
+	transition-duration: 500ms;
 }
 .image-holder:hover, .image-holder:focus, .image-holder:active { /*hover effect for image*/
 	filter: invert(100%);
+	transition-duration: 500ms;
 }
 @keyframes fadeDown { /*animation for opening details*/
 	0% {
@@ -91,7 +88,6 @@ table:hover, table:focus, table:active { /*hover for table*/
 		transform: translateY(0);
 	}
 }
-
 details[open] { /*open details*/
 	animation-name: fadeDown;
 	animation-duration: 1s;

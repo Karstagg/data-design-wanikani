@@ -94,24 +94,28 @@
 				<h2>Entities and Attributes</h2>
 				<details>
 					<summary></summary>
-					<ul>Radicals
-						<li>radicalId (primary auto)</li>
+					<ul>Radicals *Strong*
+						<li>radicalId (PRIMARY_KEY AUTO_INCREMENT)</li>
 						<li>radical</li>
 						<li>radicalLevel</li>
-						<li>correctThreshold</li>
+						<li>radicalCorrectThreshold</li>
 					</ul>
-					<ul>Profile
-						<li>userId (primary auto)</li>
+					<ul>Profile *Strong*
+						<li>userId (PRIMARY_KEY AUTO_INCREMENT)</li>
 						<li>userName</li>
 						<li>userEmail</li>
 						<li>userLevel</li>
 					</ul>
-					<ul>Attempts
-						<li>userId (foreign)</li>
-						<li>radicalId (foreign)</li>
-						<li>isCorrect</li>
-						<li>timeTested</li>
+					<ul>Attempts *Weak*
+						<li>attemptsUserId (FOREIGN_KEY)</li>
+						<li>attemptsRadicalId (FOREIGN_KEY)</li>
+						<li>attemptsIsCorrect</li>
+						<li>attemptsTimeTested</li>
 					</ul>
+					<br>
+					<div class="image-holder">
+						<img src="img/wanikaniDiagram.png" alt="Wanikani ERD">
+					</div>
 				</details>
 			</section>
 		</main>
