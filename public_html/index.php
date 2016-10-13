@@ -96,39 +96,36 @@
 					<summary></summary>
 					<ul>
 						<li>Radicals</li>
-						<details>
-							<summary>Attributes</summary>
+						<li>
 							<ul>
 								<li>radicalId (primary auto)</li>
 								<li>radical</li>
 								<li>radicalLevel</li>
 								<li>correctThreshold</li>
 							</ul>
-						</details>
+						</li>
 					</ul>
 					<ul>
 						<li>Profile</li>
-						<details>
-							<summary>Attributes</summary>
+						<li>
 							<ul>
 								<li>userId (primary auto)</li>
 								<li>userName</li>
 								<li>userEmail</li>
 								<li>userLevel</li>
 							</ul>
-						</details>
+						</li>
 					</ul>
 					<ul>
 						<li>Attempts</li>
-						<details>
-							<summary>Attributes</summary>
+						<li>
 							<ul>
 								<li>userId (foreign)</li>
 								<li>radicalId (foreign)</li>
 								<li>isCorrect</li>
 								<li>timeTested</li>
 							</ul>
-						</details>
+						</li>
 					</ul>
 				</details>
 			</section>
