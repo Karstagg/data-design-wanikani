@@ -15,6 +15,7 @@ header { /*style for the header*/
 	background: #222;
 	height: 100px;
 	margin: 0 auto;
+	border-bottom: 2px;
 }
 .header-main-text { /*Main header text*/
 	width: 80%;
@@ -88,16 +89,6 @@ table:hover, table:focus, table:active { /*hover for table*/
 	100% {
 		opacity: 1;
 		transform: translateY(0);
-	}
-}
-@keyframes fadeUp { /*animation for closing details*/
-	0% {
-		opacity: 1;
-		transform: translateY(0);
-	}
-	100% {
-		opacity: 0;
-		transform: translateY(-1.25em)
 	}
 }
 
