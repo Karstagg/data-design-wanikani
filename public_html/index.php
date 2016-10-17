@@ -32,6 +32,7 @@
 		<meta name="theme-color" content="#ffffff">
 
 		<title>Data Design for Wanikani Radicals</title>
+
 	</head>
 	<body>
 		<!-- the header -->
