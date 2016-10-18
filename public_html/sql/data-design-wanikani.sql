@@ -1,7 +1,7 @@
 
-DROP TABLE IF EXISTS profile;
-DROP TABLE IF EXISTS radocals;
 DROP TABLE IF EXISTS attempts;
+DROP TABLE IF EXISTS radicals;
+DROP TABLE IF EXISTS profile;
 
 -- create profile table
 CREATE TABLE profile (
@@ -13,7 +13,7 @@ CREATE TABLE profile (
 	UNIQUE(userId),
 	UNIQUE(userEmail),
 -- primary key
-	PRIMARY KEY(profileId)
+	PRIMARY KEY(userId)
 );
 -- create radical table
 CREATE TABLE radicals (
