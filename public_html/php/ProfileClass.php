@@ -94,7 +94,7 @@ class ProfileClass implements \JsonSerializable  {
 	/**
 	 * mutator method for user id
 	 *
-	 * @param int|null $newUserId new value of tweet id
+	 * @param int|null $newUserId new value of user id
 	 * @throws \RangeException if $newUserId is not positive
 	 * @throws \TypeError if $newUserId is not an integer
 	 **/
@@ -180,32 +180,57 @@ class ProfileClass implements \JsonSerializable  {
 	/**
 	 * accessor method for user level
 	 *
-	 * @return int|null value of user levellevel
+	 * @return int|null value of user level
 	 **/
-	public function getUserId() {
-		return($this->userId);
+	public function getUserLevel() {
+		return($this->userLevel);
 	}
 	/**
 	 * mutator method for user level
 	 *
-	 * @param int|null $newUserId new value of tweet level
-	 * @throws \RangeException if $newUserId is not positive
-	 * @throws \TypeError if $newUserId is not an integer
+	 * @param int|null $newUserLevel new value of user level
+	 * @throws \RangeException if $newUserLevel is not positive
+	 * @throws \TypeError if $newUserLevel is not an integer
 	 **/
-	public function setUserId(int $newUserId = null) {
+	public function setUserLevel(int $newUserLevel = null) {
 		// base case: if the User level is null, this a new User without a mySQL assigned 		id (yet)
-		if($newUserId === null) {
+		if($newUserLevel === null) {
 			$this->userLevel = null;
 			return;
 		}
 
 		// verify the User level is positive
-		if($newUserId <= 0) {
+		if($newUserLevel <= 0) {
 			throw(new \RangeException("User level is not positive"));
 		}
 
 		// convert and store the User level
-		$this->userId = $newUserId;
+		$this->userLevel = $newUserLevel;
+	}
+
+	/**
+	 * inserts this Profile into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo) { //PDO is a class that represents a db connection
+		// enforce the userId is null (i.e., don't insert a user id that already exists)
+		if($this->userId !== null) {
+			throw(new \PDOException("not a user id"));
+		}
+
+		// create query template
+		$query = "INSERT INTO profile(userId, userName, userEmail, userLevel) VALUES(:userId, :userName, :userEmail, :userLevel)"; //wtf is : for?
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = ["userId" => $this->userId, "userName" => $this->userName, "userEmail" => $this->userEmail, "userLevel" => $this->userLevel];
+		$statement->execute($parameters);
+
+		// update the null userId with what mySQL just gave us
+		$this->userId = intval($pdo->lastInsertId());
 	}
 
 }
@@ -518,7 +543,7 @@ class Tweet implements \JsonSerializable {
 		}
 		return($tweets);
 	}
-
+//*********************HERE HERE HERE HERE HERE **********************************
 	/**
 	 * gets the Tweet by tweetId
 	 *
