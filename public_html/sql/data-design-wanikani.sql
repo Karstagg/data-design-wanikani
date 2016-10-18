@@ -10,6 +10,7 @@ CREATE TABLE profile (
 	userEmail varchar(128) NOT NULL,
 	userLevel INT UNSIGNED NOT NULL,
 -- unique index
+	UNIQUE(userName),
 	UNIQUE(userId),
 	UNIQUE(userEmail),
 -- primary key
