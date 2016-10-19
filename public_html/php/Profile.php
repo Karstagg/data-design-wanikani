@@ -32,10 +32,10 @@ class ProfileClass implements \JsonSerializable  {
 	 **/
 	private $userId;
 	/**
-	 * The user name; Unique
-	 * @var string $userName
+	 * The username; Unique
+	 * @var string $username
 	 **/
-	private $userName;
+	private $username;
 	/**
 	 * The user's email; Unique
 	 * @var string $userEmail
@@ -51,7 +51,7 @@ class ProfileClass implements \JsonSerializable  {
 	 * constructor for this profile
 	 *
 	 * @param int|null $newUserId id of this user
-	 * @param string $newUserName string containing the username
+	 * @param string $newusername string containing the username
 	 * @param string $newUserEmail string containing the user's email
 	 * @param int|null $newUserLevel int containing the user's level
 	 * @throws \InvalidArgumentException if data types are not valid
@@ -59,10 +59,10 @@ class ProfileClass implements \JsonSerializable  {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	**/
-	public function __construct(int $newUserId = null, string $newUserName, string 	$newUserEmail, int $newUserLevel = null) {
+	public function __construct(int $newUserId = null, string $newusername, string 	$newUserEmail, int $newUserLevel = null) {
 		try {
 			$this->setuserId($newUserId);
-			$this->setUserName($newUserName);
+			$this->setusername($newusername);
 			$this->setUserEmail($newUserEmail);
 			$this->setUserLevel($newUserLevel);
 		}
@@ -114,36 +114,36 @@ class ProfileClass implements \JsonSerializable  {
 		$this->userId = $newUserId;
 	}
 	/**
-	 * accessor method for user name
+	 * accessor method for username
 	 *
-	 * @return int value of user name
+	 * @return int value of username
 	 **/
-	public function getUserName() {
-		return($this->userName);
+	public function getusername() {
+		return($this->username);
 	}
 	/**
-	 * mutator method for user name
+	 * mutator method for username
 	 *
-	 * @param string $newUserName new value of user name
-	 * @throws \InvalidArgumentException if $newUserName is not a string or insecure
-	 * @throws \RangeException if $newUserName is > 32 characters
-	 * @throws \TypeError if $newUserName is not a string
+	 * @param string $newusername new value of username
+	 * @throws \InvalidArgumentException if $newusername is not a string or insecure
+	 * @throws \RangeException if $newusername is > 32 characters
+	 * @throws \TypeError if $newusername is not a string
 	 **/
-	public function setUserName(string $newUserName) {
-		// verify the user name is secure
-		$newUserName = trim($newUserName);
-		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newUserName) === true) {
-			throw(new \InvalidArgumentException("user name is empty or insecure"));
+	public function setusername(string $newusername) {
+		// verify the username is secure
+		$newusername = trim($newusername);
+		$newusername = filter_var($newusername, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newusername) === true) {
+			throw(new \InvalidArgumentException("username is empty or insecure"));
 		}
 
-		// verify the user name will fit in the database
-		if(strlen($newUserName) > 32) {
-			throw(new \RangeException("user name is too large"));
+		// verify the username will fit in the database
+		if(strlen($newusername) > 32) {
+			throw(new \RangeException("username is too large"));
 		}
 
-		// store the user name
-		$this->userName = $newUserName;
+		// store the username
+		$this->username = $newusername;
 	}
 	/**
 	 * accessor method for user email
@@ -161,7 +161,7 @@ class ProfileClass implements \JsonSerializable  {
 	 * @throws \RangeException if $newUserEmail is > 128 characters
 	 * @throws \TypeError if $newUserEmail is not a string
 	 **/
-	public function setUserName(string $newUserEmail) {
+	public function setusername(string $newUserEmail) {
 		// verify the user email is secure
 		$newUserEmail = trim($newUserEmail);
 		$newUserEmail = filter_var($newUserEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -174,7 +174,7 @@ class ProfileClass implements \JsonSerializable  {
 			throw(new \RangeException("user email is too large"));
 		}
 
-		// store the user name
+		// store the username
 		$this->userEmail = $newUserEmail;
 	}
 	/**
@@ -222,11 +222,11 @@ class ProfileClass implements \JsonSerializable  {
 		}
 
 		// create query template
-		$query = "INSERT INTO profile(userId, userName, userEmail, userLevel) VALUES(:userId, :userName, :userEmail, :userLevel)"; //wtf is : for?
+		$query = "INSERT INTO profile(userId, username, userEmail, userLevel) VALUES(:userId, :username, :userEmail, :userLevel)"; //wtf is : for?
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["userId" => $this->userId, "userName" => $this->userName, "userEmail" => $this->userEmail, "userLevel" => $this->userLevel];
+		$parameters = ["userId" => $this->userId, "username" => $this->username, "userEmail" => $this->userEmail, "userLevel" => $this->userLevel];
 		$statement->execute($parameters);
 
 		// update the null userId with what mySQL just gave us
@@ -267,37 +267,116 @@ class ProfileClass implements \JsonSerializable  {
 		}
 
 		// create query template
-		$query = "UPDATE profile SET userId = :userLevel, userName = :userName, userEmail = :userEmail WHERE userId = :userId";
+		$query = "UPDATE profile SET userId = :userLevel, username = :username, userEmail = :userEmail WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["userName" => $this->userName, "userEmail" => $this->userEmail, "userLevel" => $userLevel, "userId" => $this->userId];
+		$parameters = ["username" => $this->username, "userEmail" => $this->userEmail, "userLevel" => $userLevel, "userId" => $this->userId];
 		$statement->execute($parameters);
 	}
 	/**
 	 * gets the profile by username
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $userName profile to search for
+	 * @param string $username profile to search for
 	 * @return \SplFixedArray SplFixedArray of profiles found -hrm
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getTweetByTweetContent(\PDO $pdo, string $userName) {
+	public static function getProfileByUsername(\PDO $pdo, string $username) {
 		// sanitize the description before searching
-		$userName = trim($userName);
-		$userName = filter_var($userName, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($userName) === true) {
-			throw(new \PDOException("Username is invalid"));
+		$username = trim($username);
+		$username = filter_var($username, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($username) === true) {
+			throw(new \PDOException("username is invalid"));
 		}
 
 		// create query template
-		$query = "SELECT userId, userName, userEmail, userLevel FROM tweet WHERE userId LIKE :userId";
+		$query = "SELECT userId, username, userEmail, userLevel FROM profile WHERE username LIKE :username";
 		$statement = $pdo->prepare($query);
 
-		// bind the tweet content to the place holder in the template
-		$tweetContent = "%$tweetContent%";
-		$parameters = ["tweetContent" => $tweetContent];
+		// bind the username to the place holder in the template
+		$username = "%$username%";
+		$parameters = ["username" => $username];
+		$statement->execute($parameters);
+
+		// build an array of profiles --- is this necessary? TODO
+		$profiles = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$profiles = new profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
+				$profiles[$profiles->key()] = $profile;
+				$profiles->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($profiles);
+	}
+	/**
+	 * gets the profile by user email
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $user email profile to search for
+	 * @return \SplFixedArray SplFixedArray of profiles found -hrm
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getTweetByTweetContent(\PDO $pdo, string $userEmail) {
+		// sanitize the description before searching
+		$userEmail = trim($userEmail);
+		$userEmail = filter_var($userEmail, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($userEmail) === true) {
+			throw(new \PDOException("userEmail is invalid"));
+		}
+
+		// create query template
+		$query = "SELECT userId, userEmail, username, userLevel FROM profile WHERE userEmail LIKE :userEmail";
+		$statement = $pdo->prepare($query);
+
+		// bind the use email to the place holder in the template
+		$userEmail = "%$userEmail%";
+		$parameters = ["userEmail" => $userEmail];
+		$statement->execute($parameters);
+
+		// build an array of profiles
+		$profiles = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$profiles = new profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
+				$profiles[$profiles->key()] = $profile;
+				$profiles->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($profiles);
+	}
+	/**
+	 * gets the profile by UserId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $userId user id to search by
+	 * @return \SplFixedArray SplFixedArray of  found profiles
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getProfileByUserId(\PDO $pdo, int $userId) {
+		// sanitize the profile id before searching
+		if($userId <= 0) {
+			throw(new \RangeException("userId must be positive"));
+		}
+
+		// create query template
+		$query = "SELECT userId, username, userEmail, userLevel FROM profile WHERE userId = :userId";
+		$statement = $pdo->prepare($query);
+
+		// bind the tweet profile id to the place holder in the template
+		$parameters = ["userId" => $userId];
 		$statement->execute($parameters);
 
 		// build an array of tweets
