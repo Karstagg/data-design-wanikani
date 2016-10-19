@@ -48,7 +48,7 @@ class ProfileClass implements \JsonSerializable  {
 	private $userLevel;
 
 	/**
-	 * constructor for this Tweet
+	 * constructor for this profile
 	 *
 	 * @param int|null $newUserId id of this user
 	 * @param string $newUserName string containing the username
@@ -132,7 +132,7 @@ class ProfileClass implements \JsonSerializable  {
 	public function setUserName(string $newUserName) {
 		// verify the user name is secure
 		$newUserName = trim($newUserName);
-		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING);
+		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newUserName) === true) {
 			throw(new \InvalidArgumentException("user name is empty or insecure"));
 		}
@@ -164,7 +164,7 @@ class ProfileClass implements \JsonSerializable  {
 	public function setUserName(string $newUserEmail) {
 		// verify the user email is secure
 		$newUserEmail = trim($newUserEmail);
-		$newUserEmail = filter_var($newUserEmail, FILTER_SANITIZE_STRING);
+		$newUserEmail = filter_var($newUserEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newUserEmail) === true) {
 			throw(new \InvalidArgumentException("user email is empty or insecure"));
 		}
@@ -274,7 +274,47 @@ class ProfileClass implements \JsonSerializable  {
 		$parameters = ["userName" => $this->userName, "userEmail" => $this->userEmail, "userLevel" => $userLevel, "userId" => $this->userId];
 		$statement->execute($parameters);
 	}
+	/**
+	 * gets the profile by username
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $userName profile to search for
+	 * @return \SplFixedArray SplFixedArray of profiles found -hrm
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getTweetByTweetContent(\PDO $pdo, string $userName) {
+		// sanitize the description before searching
+		$userName = trim($userName);
+		$userName = filter_var($userName, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($userName) === true) {
+			throw(new \PDOException("Username is invalid"));
+		}
 
+		// create query template
+		$query = "SELECT userId, userName, userEmail, userLevel FROM tweet WHERE userId LIKE :userId";
+		$statement = $pdo->prepare($query);
+
+		// bind the tweet content to the place holder in the template
+		$tweetContent = "%$tweetContent%";
+		$parameters = ["tweetContent" => $tweetContent];
+		$statement->execute($parameters);
+
+		// build an array of tweets
+		$tweets = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$tweet = new Tweet($row["tweetId"], $row["tweetProfileId"], $row["tweetContent"], $row["tweetDate"]);
+				$tweets[$tweets->key()] = $tweet;
+				$tweets->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($tweets);
+	}
 
 
 }
