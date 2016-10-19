@@ -22,7 +22,7 @@ namespace Edu\Cnm\mfisher16\DataDesign;
 //No idea what to do with this at the moment
 //require_once("autoload.php");
 
-class ProfileClass implements \JsonSerializable  {
+class Profile /*implements \JsonSerializable*/  {
 	//source not yet included
 	//use ValidateDate;
 
@@ -51,7 +51,7 @@ class ProfileClass implements \JsonSerializable  {
 	 * constructor for this profile
 	 *
 	 * @param int|null $newUserId id of this user
-	 * @param string $newusername string containing the username
+	 * @param string $newUsername string containing the username
 	 * @param string $newUserEmail string containing the user's email
 	 * @param int|null $newUserLevel int containing the user's level
 	 * @throws \InvalidArgumentException if data types are not valid
@@ -59,10 +59,10 @@ class ProfileClass implements \JsonSerializable  {
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurs
 	**/
-	public function __construct(int $newUserId = null, string $newusername, string 	$newUserEmail, int $newUserLevel = null) {
+	public function __construct(int $newUserId = null, string $newUsername, string 	$newUserEmail, int $newUserLevel = null) {
 		try {
-			$this->setuserId($newUserId);
-			$this->setusername($newusername);
+			$this->setUserId($newUserId);
+			$this->setUsername($newUsername);
 			$this->setUserEmail($newUserEmail);
 			$this->setUserLevel($newUserLevel);
 		}
@@ -118,7 +118,7 @@ class ProfileClass implements \JsonSerializable  {
 	 *
 	 * @return int value of username
 	 **/
-	public function getusername() {
+	public function getUsername() {
 		return($this->username);
 	}
 	/**
@@ -129,21 +129,21 @@ class ProfileClass implements \JsonSerializable  {
 	 * @throws \RangeException if $newusername is > 32 characters
 	 * @throws \TypeError if $newusername is not a string
 	 **/
-	public function setusername(string $newusername) {
+	public function setUsername(string $newUsername) {
 		// verify the username is secure
-		$newusername = trim($newusername);
-		$newusername = filter_var($newusername, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newusername) === true) {
+		$newUsername = trim($newUsername);
+		$newUsername = filter_var($newUsername, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newUsername) === true) {
 			throw(new \InvalidArgumentException("username is empty or insecure"));
 		}
 
 		// verify the username will fit in the database
-		if(strlen($newusername) > 32) {
+		if(strlen($newUsername) > 32) {
 			throw(new \RangeException("username is too large"));
 		}
 
 		// store the username
-		$this->username = $newusername;
+		$this->username = $newUsername;
 	}
 	/**
 	 * accessor method for user email
@@ -161,7 +161,7 @@ class ProfileClass implements \JsonSerializable  {
 	 * @throws \RangeException if $newUserEmail is > 128 characters
 	 * @throws \TypeError if $newUserEmail is not a string
 	 **/
-	public function setusername(string $newUserEmail) {
+	public function setUserEmail(string $newUserEmail) {
 		// verify the user email is secure
 		$newUserEmail = trim($newUserEmail);
 		$newUserEmail = filter_var($newUserEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -222,7 +222,7 @@ class ProfileClass implements \JsonSerializable  {
 		}
 
 		// create query template
-		$query = "INSERT INTO profile(userId, username, userEmail, userLevel) VALUES(:userId, :username, :userEmail, :userLevel)"; //wtf is : for?
+		$query = "INSERT INTO Profile(userId, username, userEmail, userLevel) VALUES(:userId, :username, :userEmail, :userLevel)"; //wtf is : for?
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
@@ -240,13 +240,13 @@ class ProfileClass implements \JsonSerializable  {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function delete(\PDO $pdo) {
-		// enforce the user id is not null (i.e., don't delete a tweet that hasn't been inserted)
+		// enforce the user id is not null (i.e., don't delete a profile that hasn't been inserted)
 		if($this->userId === null) {
 			throw(new \PDOException("unable to delete a user that does not exist"));
 		}
 
 		// create query template
-		$query = "DELETE FROM profile WHERE userId = :tuserId";
+		$query = "DELETE FROM `profile` WHERE userId = :tuserId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holder in the template
@@ -261,17 +261,17 @@ class ProfileClass implements \JsonSerializable  {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function update(\PDO $pdo) {
-		// enforce the userId is not null (i.e., don't update a tweet that hasn't been inserted)
+		// enforce the userId is not null (i.e., don't update a profile that hasn't been inserted)
 		if($this->userId === null) {
-			throw(new \PDOException("unable to update a tweet that does not exist"));
+			throw(new \PDOException("unable to update a profile that does not exist"));
 		}
 
 		// create query template
-		$query = "UPDATE profile SET userId = :userLevel, username = :username, userEmail = :userEmail WHERE userId = :userId";
+		$query = "UPDATE profile SET userId = :userId, username = :username, userEmail = :userEmail, userLevel = :userLevel WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = ["username" => $this->username, "userEmail" => $this->userEmail, "userLevel" => $userLevel, "userId" => $this->userId];
+		$parameters = ["username" => $this->username, "userEmail" => $this->userEmail, "userLevel" => $this->userLevel, "userId" => $this->userId];
 		$statement->execute($parameters);
 	}
 	/**
@@ -305,8 +305,8 @@ class ProfileClass implements \JsonSerializable  {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$profiles = new profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
-				$profiles[$profiles->key()] = $profile;
+				$profiles = new Profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
+				$profiles[$profiles->key()] = $profiles;
 				$profiles->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
@@ -319,12 +319,12 @@ class ProfileClass implements \JsonSerializable  {
 	 * gets the profile by user email
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $user email profile to search for
+	 * @param string $userEmail profile to search for
 	 * @return \SplFixedArray SplFixedArray of profiles found -hrm
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getTweetByTweetContent(\PDO $pdo, string $userEmail) {
+	public static function getProfileByUserEmail(\PDO $pdo, string $userEmail) {
 		// sanitize the description before searching
 		$userEmail = trim($userEmail);
 		$userEmail = filter_var($userEmail, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -346,8 +346,8 @@ class ProfileClass implements \JsonSerializable  {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$profiles = new profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
-				$profiles[$profiles->key()] = $profile;
+				$profiles = new Profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
+				$profiles[$profiles->key()] = $profiles;
 				$profiles->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
@@ -357,44 +357,83 @@ class ProfileClass implements \JsonSerializable  {
 		return($profiles);
 	}
 	/**
-	 * gets the profile by UserId
+	 * gets the profile by userId
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param int $userId user id to search by
-	 * @return \SplFixedArray SplFixedArray of  found profiles
+	 * @param int $userId user id to search for
+	 * @return profile|null profile found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
 	public static function getProfileByUserId(\PDO $pdo, int $userId) {
-		// sanitize the profile id before searching
+		// sanitize the userId before searching
 		if($userId <= 0) {
-			throw(new \RangeException("userId must be positive"));
+			throw(new \PDOException("profile id is not positive"));
 		}
 
 		// create query template
 		$query = "SELECT userId, username, userEmail, userLevel FROM profile WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
-		// bind the tweet profile id to the place holder in the template
+		// bind the user id to the place holder in the template
 		$parameters = ["userId" => $userId];
 		$statement->execute($parameters);
 
-		// build an array of tweets
-		$tweets = new \SplFixedArray($statement->rowCount());
+		// grab the profile from mySQL
+		try {
+			$profile = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$profile = new Profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($profile);
+	}
+	/**
+	 * gets all profiles
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of profiles found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllProfiles(\PDO $pdo) {
+		// create query template
+		$query = "SELECT userId, userName, userEmail, userLevel FROM profile";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of profiles
+		$profiles = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$tweet = new Tweet($row["tweetId"], $row["tweetProfileId"], $row["tweetContent"], $row["tweetDate"]);
-				$tweets[$tweets->key()] = $tweet;
-				$tweets->next();
+				$profiles = new Profile($row["userId"], $row["username"], $row["userEmail"], $row["userLevel"]);
+				$profiles[$profiles->key()] = $profiles;
+				$profiles->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($tweets);
+		return ($profiles);
 	}
 
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	/*public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		$fields[""] = $this->->getTimestamp() * 1000;
+		return($fields);
+	}
+	*/
 
 }
 
