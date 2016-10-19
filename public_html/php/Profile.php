@@ -403,7 +403,7 @@ class Profile /*implements \JsonSerializable*/  {
 	 **/
 	public static function getAllProfiles(\PDO $pdo) {
 		// create query template
-		$query = "SELECT userId, userName, userEmail, userLevel FROM profile";
+		$query = "SELECT userId, username, userEmail, userLevel FROM profile";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 

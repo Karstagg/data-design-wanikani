@@ -1,6 +1,6 @@
 
 DROP TABLE IF EXISTS attempts;
-DROP TABLE IF EXISTS radicals;
+DROP TABLE IF EXISTS radical;
 DROP TABLE IF EXISTS profile;
 
 -- create profile table
@@ -17,7 +17,7 @@ CREATE TABLE profile (
 	PRIMARY KEY(userId)
 );
 -- create radical table
-CREATE TABLE radicals (
+CREATE TABLE radical (
 	radicalId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	radical varchar(32) NOT NULL,
 	radicalCorrectThreshold INT UNSIGNED NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE attempts (
 	INDEX(attemptsRadicalId),
 	-- foreign key relations
 	FOREIGN KEY(attemptsUserId) REFERENCES profile(userId),
-	FOREIGN KEY(attemptsRadicalId) REFERENCES radicals(radicalId),
+	FOREIGN KEY(attemptsRadicalId) REFERENCES radical(radicalId),
 	-- finally, create a composite foreign key with the two foreign keys
 	PRIMARY KEY(attemptsUserId, attemptsRadicalId)
 );
