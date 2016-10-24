@@ -132,7 +132,7 @@ class Radicals /*implements \JsonSerializable*/  {
 	public function setRadical(string $newRadical) {
 		// verify the radical is secure
 		$newRadical = trim($newRadical);
-		$newRadical = filter_var($newRadical, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newRadical = filter_var($newRadical, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newRadical) === true) {
 			throw(new \InvalidArgumentException("radical is empty or insecure"));
 		}
@@ -428,12 +428,13 @@ class Radicals /*implements \JsonSerializable*/  {
 	 *
 	 * @return array resulting state variables to serialize
 	 **/
-	/*public function jsonSerialize() {
+	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields[""] = $this->->getTimestamp() * 1000;
+		$fields[""] = $this->getTimestamp() * 1000;
 		return($fields);
 	}
-	*/
+
 
 }
 
+$testRadical = new Radicals(null, "encodedradical", 3, 10);

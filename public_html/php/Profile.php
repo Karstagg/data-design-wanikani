@@ -428,12 +428,14 @@ class Profile /*implements \JsonSerializable*/  {
 	 *
 	 * @return array resulting state variables to serialize
 	 **/
-	/*public function jsonSerialize() {
+	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields[""] = $this->->getTimestamp() * 1000;
+		$fields[""] = $this->getTimestamp() * 1000;
 		return($fields);
 	}
-	*/
+
+
 
 }
 
+$testProfile = new Profile(null, "matt", "matt@matt.com", 10);
